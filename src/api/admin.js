@@ -37,7 +37,7 @@ export let loginAuto = async () => {
     let loginId = localStorage.getItem('loginId')
     let loginPwd = localStorage.getItem('loginPwd')
     if (loginId && loginPwd) {
-        let params = {loginId, loginPwd}
+        // let params = {loginId, loginPwd}
         //let data=await $get('Admin/Login', params)
         let data = new Object();
         data.success = true;
@@ -57,3 +57,70 @@ export let loginAuto = async () => {
     }
 
 }
+
+//查询列表
+export let getList = async () => {
+    let userlist = [
+        {
+            userCode: 'lidj',
+            userName: '李东峻'
+
+        },
+        {
+            userCode: 'zhangkl',
+            userName: '张开蕾'
+
+        },
+        {
+            userCode: 'liuxz',
+            userName: '刘祥志'
+
+        },
+        {
+            userCode: 'yiyk',
+            userName: '衣永康'
+
+        }
+    ]
+    let data = {
+        success: true,
+        list: userlist
+    }
+    return data
+
+}
+
+//增加/编辑账号
+export let editUser = async (params) => {
+
+    let {isAdd, formData} = params
+    if (!formData.userCode) {
+        $msg_w("用户编码不能为空")
+    }
+    if (!formData.userName) {
+        $msg_w("用户名称不能为空")
+    }
+
+    if (formData.userCode && formData.userName) {
+
+        if (isAdd) {
+            //调用添加接口
+        } else {
+            //调用更新接口
+        }
+        //模拟返回数据
+        let returndata = {
+            success: true,
+            msg: isAdd ? "保存成功" : "修改成功"
+        }
+
+        if (returndata.success) {
+            $msg_s(returndata.msg)
+        } else {
+            $msg_e(returndata.msg)
+        }
+        return returndata
+    }
+
+}
+//删除账号

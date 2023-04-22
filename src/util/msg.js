@@ -1,5 +1,5 @@
 //消息框
-import {ElMessage} from 'element-plus'
+import {ElMessage, ElMessageBox} from 'element-plus'
 
 export let $msg_s = (val, duration = 2000) => {
     ElMessage({
@@ -24,4 +24,43 @@ export let $msg_e = (val, duration = 2000) => {
         duration,
         type: 'error',
     })
+}
+
+export let $confirm = async (msg, title, type) => {
+    return new Promise((resolve, reject) => {
+        ElMessageBox.confirm(
+            msg,
+            title,
+            {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type,
+            }
+        )
+            .then(() => {
+                resolve();
+            })
+            .catch(() => {
+            })
+    })
+}
+export let $comfirm1 = async (msg, title, type, callback) => {
+
+    let data = true;
+    ElMessageBox.confirm(
+        msg,
+        title,
+        {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: type,
+        }
+    )
+        .then(() => {
+
+        })
+        .catch(() => {
+        })
+    console.log("确认框实际返回：" + data)
+    return data
 }
